@@ -1,0 +1,33 @@
+import csv
+def collect(main_c , tubes , event):
+    closest_tube = min(tubes,key = lambda tube: tube.x)
+    csv_file = open("game_data.csv", "a" , newline = "")
+    writer = csv.writer(csv_file)
+    if csv_file.tell() == 0:
+        writer.writerow([
+            "player_y",
+            "foot",
+            "distance",
+            "tub_line",
+            "distance_line",
+            "fall_speed",
+            "player_height",
+            "player_width",
+            "tube_height",
+            "tube_width",
+            "event",
+
+        ])
+    writer.writerow([
+        main_c.y,
+        main_c.lift,
+        closest_tube.gap,
+        closest_tube.x - main_c.x,
+        closest_tube.gap - main_c.y,
+        main_c.velocity,
+        main_c.height,
+        closest_tube.width,
+        event,
+
+    ])
+    csv_file.close()
